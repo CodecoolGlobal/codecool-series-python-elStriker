@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% block title %}Shows{% endblock %}
+{% block pagetitle %}Shows{% endblock %}
+{% block welcome %}{% endblock %}
+{% block content %}
+        <div class="card">
+            <table class="details card">
+                <thead>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <div class="buttons text-center">
+                <button type="button" class="previous fas fa-arrow-circle-left" id="prev_button">Previous page</button>
+                    <button class="pagination-btn">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">3</button>
+                    <button class="pagination-btn">4</button>
+                    <button class="pagination-btn">5</button>
+                <button type="button" class="next fas fa-arrow-circle-right" id="next_button">Next button</button>
+            </div>
+        </div>
+{% endblock %}
+{% block  script %}
+    <script type="module" src="{{ url_for('static', filename='js/paginationManager.js') }}" defer></script>
+{% endblock %}

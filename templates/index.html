@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>CsED</title>
+    <title>{% block title %}CsED{% endblock %}</title>
 
     <!-- Import Montserrat font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -28,6 +28,7 @@
 
     <!-- page specific styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style/detailed-view.css') }}">
+
 </head>
 
 <body>
@@ -41,7 +42,10 @@
         </div>
     </header>
     <section>
-        <h1 class="title text-center">Welcome page</h1>
+    {% block nav %}
+    {% endblock %}
+        <h1 class="title text-center">{% block pagetitle %}Welcome page{% endblock %}</h1>
+        {% block welcome %}
         <div class="card">
             <h2>Welcome TV show lovers!</h2>
             <p>This great site is happy to bring you your favourite TV show's <i>details</i>.</p>
@@ -52,6 +56,8 @@
                 navigation.
             </p>
         </div>
+    {% endblock %}
+    {% block content %}
         <div class="card">
             <ul>
                 {% for show in shows %}
@@ -61,6 +67,8 @@
                 {% endfor %}
             </ul>
         </div>
+    {% endblock %}
+    {% block script %}{% endblock %}
     </section>
     <footer>
         Copyright, bla-bla

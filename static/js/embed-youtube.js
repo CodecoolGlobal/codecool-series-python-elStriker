@@ -14,7 +14,7 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     height: '270',
     width: '480',
-    videoId: videoId,
+    videoId: getVideoId(),
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange
@@ -39,4 +39,11 @@ function onPlayerStateChange(event) {
 }
 function stopVideo() {
   player.stopVideo();
+}
+
+function getVideoId() {
+  const div = document.getElementById("player");
+  let trailerLink = div.dataset.trailer;
+  let startIndexOfId = trailerLink.lastIndexOf('=') + 1;
+  return trailerLink.substring(startIndexOfId)
 }
