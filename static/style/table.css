@@ -36,5 +36,14 @@ table tr:nth-child(even) {
 }
 
 table th.action-column {
-    background: rgb(203, 75, 70);
+    /*background: rgb(203, 75, 70);*/
+    background: #6197c6;
+}
+
+table th.sortable.asc::after {
+    content: "\2191";
+}
+
+table th.sortable.desc::after {
+    content: "\2193";
 }

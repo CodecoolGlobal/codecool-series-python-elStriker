@@ -72,6 +72,7 @@ class Pagination {
 
     bblSort(arr, event) {
         const column = event.currentTarget;
+        /*Mit queryselctor all abfragen welche class auf sortable desc or asc gesetzt ist und remove*/
         const columnName = column.innerText.toLowerCase();
         if (column.classList.contains('desc')) {
             sort(arr, columnName, 'asc');
