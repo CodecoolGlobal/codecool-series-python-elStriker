@@ -54,3 +54,48 @@ def get_seasons_by_show_id(show_id):
     WHERE shows.id = {show_id}
     GROUP BY shows.id, seasons.id;
     """).format(show_id=sql.Literal(show_id)))
+
+
+def get_genres_by_limit():
+    return dm.execute_select(sql.SQL(
+        """
+        Select g.id, g.name as genre
+    FROM genres g;
+        """
+    ))
+
+
+def get_genre_by_limit(genre_id):
+    return dm.execute_select(
+        """
+        Select g.id, g.name as genre,s.title,
+       ROUND(s.rating::numeric,1) as rating,
+       DATE_PART('year', s.year::date) as year,
+       count(a.name) as actor_count
+    FROM genres g
+    JOIN show_genres sg on g.id = sg.genre_id
+    JOIN shows s on s.id = sg.show_id
+    JOIN show_characters sc on s.id = sc.show_id
+    JOIN actors a on a.id = sc.actor_id
+    WHERE g.id = %(genre_id)s
+    GROUP BY g.id, s.id
+    HAVING count(a.name)  < 20;
+    """,{"genre_id": genre_id})
+
+
+def get_actor_detail():
+    return dm.execute_select(sql.SQL(
+        """
+        SELECT
+        split_part("name", ' ', 1) AS firstname,
+        array_agg(s.title) shows,
+        a.birthday
+        FROM show_characters sc
+            JOIN actors a ON sc.actor_id = a.id
+            JOIN shows s ON sc.show_id = s.id
+        GROUP BY a.id
+        ORDER BY a.birthday
+        LIMIT 100;
+        """))
+
+

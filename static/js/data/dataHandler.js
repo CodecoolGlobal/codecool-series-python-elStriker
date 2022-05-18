@@ -4,10 +4,20 @@ export let dataHandler={
         return response
     },
 
-    getActors: async function(name){
-        const response = await apiGet(`/api/get-actrors/${name}`);
+    getGenres: async function(){
+        const response = await apiGet("/api/get-genres");
         return response
+    },
+
+    getGenresDetail: async function(genre_id){
+        const response = await apiGet(`/api/get-genres-detail/${genre_id}`);
+        return response
+    },
+
+    getActorsNshows: async function() {
+        return await apiGet("/api/get-actors-detail")
     }
+    
 };
 
 async function apiGet(url){
