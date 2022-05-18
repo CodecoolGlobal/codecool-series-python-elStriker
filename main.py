@@ -33,6 +33,11 @@ def get_genres():
     return jsonify(queries.get_genres_by_limit())
 
 
+@app.route('/api/get-ordered-shows/<order>')
+def get_shows_by_order(order):
+    return jsonify(queries.get_shows_by_episode_count(order))
+
+
 @app.route('/api/get-genres-detail/<int:genre_id>')
 def get_genre_details(genre_id):
     return jsonify(queries.get_genre_by_limit(genre_id))
@@ -61,6 +66,11 @@ def show_detail(id):
     return render_template('show-details.html', details=show_details, seasons=seasons)
 
 
+@app.route('/ordered-shows')
+def render_ordered_shows():
+    return render_template('ordered_shows.html')
+
+
 @app.route('/birthday-actors')
 def display_birthday_actors():
     return render_template('birthday-actors.html')
@@ -79,6 +89,7 @@ def login():
 @app.route('/logout')
 def logout():
     pass
+
 
 def main():
     app.run(debug=True, port=5001)

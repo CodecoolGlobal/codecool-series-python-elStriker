@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block title %} Ordered Shows {% endblock %}
+{% block head %}
+    <h1 class="title text-center">Ordered Shows</h1>
+{% endblock %}
+{% block script %}
+    <script type="module" src="{{ url_for('static', filename='js/ordered_shows.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+    <div class="ordered-shows">
+    <table>
+        <thead>
+        <tr>
+            <th class="order-title">Shows Title</th>
+            <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody class="ordered-shows-table-body">
+
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

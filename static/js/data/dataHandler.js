@@ -16,8 +16,11 @@ export let dataHandler={
 
     getActorsNshows: async function() {
         return await apiGet("/api/get-actors-detail")
+    },
+
+    orderShows: async function(order) {
+        return await apiGet(`/api/get-ordered-shows/${order}`);
     }
-    
 };
 
 async function apiGet(url){

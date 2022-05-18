@@ -99,3 +99,13 @@ def get_actor_detail():
         """))
 
 
+def get_shows_by_episode_count(order):
+    return dm.execute_select(sql.SQL("""
+    SELECT shows.title, repeat('*', CAST(ROUND(shows.rating ::numeric, 0) AS INTEGER)) rating
+    FROM shows
+    JOIN seasons on shows.id = seasons.show_id
+    JOIN episodes on seasons.id = episodes.season_id
+    GROUP BY shows.id
+    ORDER BY COUNT(episodes.id) {order}
+    LIMIT 10;
+    """).format(order=sql.SQL(order)))
